@@ -17,7 +17,7 @@ public class ChildMovement_Script : MonoBehaviour
     { 
         initialPosition = transform.position;
     } 
-    private void Update()
+    private void FixedUpdate()
     {
         Vector3 motion = direction * sense * speed * Time.deltaTime;
         transform.Translate(motion);
