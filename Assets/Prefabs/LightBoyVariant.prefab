@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0830f847717668c4bb9b26e1a334380f, type: 2}
     - target: {fileID: 2347927531566535820, guid: 0ec418c85562cd04b83c3d3e260b4230, type: 3}
       propertyPath: m_Name
-      value: Boy Variant
+      value: LightBoyVariant
       objectReference: {fileID: 0}
     - target: {fileID: 2508211794699712486, guid: 0ec418c85562cd04b83c3d3e260b4230, type: 3}
       propertyPath: m_Enabled
@@ -54,15 +54,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 333bef9658e63384b9b4c2ced98c5ede, type: 2}
     - target: {fileID: 5220064316722682460, guid: 0ec418c85562cd04b83c3d3e260b4230, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5220064316722682460, guid: 0ec418c85562cd04b83c3d3e260b4230, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.46
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5220064316722682460, guid: 0ec418c85562cd04b83c3d3e260b4230, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 47.55
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5220064316722682460, guid: 0ec418c85562cd04b83c3d3e260b4230, type: 3}
       propertyPath: m_LocalRotation.w
