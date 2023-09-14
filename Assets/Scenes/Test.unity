@@ -224,12 +224,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 627232562402323063}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8045d01cb2b16d4e84f2c72da5bdcd2, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b14d499ce734dc41a19d4e301a9820f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  maxDistance: 2
-  direction: {x: 1, y: 0, z: 0}
+  speed: 0
+  maxDistance: 0
+  direction: {x: 0, y: 0, z: 0}
 --- !u!1 &1166583456
 GameObject:
   m_ObjectHideFlags: 0
