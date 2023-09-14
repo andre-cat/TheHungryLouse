@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChildMovement_Script : MonoBehaviour
+public class ChildMovement : MonoBehaviour
 {
     [Header("Child movement settings")]
     [SerializeField] [Tooltip("Child's movement speed")]
@@ -24,8 +24,8 @@ public class ChildMovement_Script : MonoBehaviour
         
         // Detect the limit of the movement
         if (Mathf.Abs(transform.position.x - initialPosition.x) >= maxDistance ||
-        Mathf.Abs(transform.position.y - initialPosition.y) >= maxDistance ||
-        Mathf.Abs(transform.position.z - initialPosition.z) >= maxDistance)
+            Mathf.Abs(transform.position.y - initialPosition.y) >= maxDistance ||
+            Mathf.Abs(transform.position.z - initialPosition.z) >= maxDistance)
         {
             sense *= -1.0f; // Invert the direction
         }
