@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 19dcaf666a157b643bc168221cbd4203, type: 2}
     - target: {fileID: 2347927531566535820, guid: 0ec418c85562cd04b83c3d3e260b4230, type: 3}
       propertyPath: m_Name
-      value: Boy (1) Variant
+      value: BlackBoyVariant
       objectReference: {fileID: 0}
     - target: {fileID: 4214046004551165486, guid: 0ec418c85562cd04b83c3d3e260b4230, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -30,15 +30,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0726ec16b03e8c7479f47e053eb13fb9, type: 2}
     - target: {fileID: 5220064316722682460, guid: 0ec418c85562cd04b83c3d3e260b4230, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 38.09
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5220064316722682460, guid: 0ec418c85562cd04b83c3d3e260b4230, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5220064316722682460, guid: 0ec418c85562cd04b83c3d3e260b4230, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 44.59
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5220064316722682460, guid: 0ec418c85562cd04b83c3d3e260b4230, type: 3}
       propertyPath: m_LocalRotation.w
