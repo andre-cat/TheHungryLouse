@@ -51,14 +51,12 @@ public class LouseMovement : MonoBehaviour
         }
         else
         {
-            //louseRb.angularVelocity = Vector3.zero;
             louseAnimator.enabled = false;
         }
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        Animator anim = other.gameObject.GetComponent<Animator>();
         Vector3 checkpointPosition = other.gameObject.transform.position;
         if (other.gameObject.CompareTag("Checkpoint"))
         {
@@ -123,5 +121,6 @@ public class LouseMovement : MonoBehaviour
     private void RestoreToTheLastPosition()
     {
         transform.position = restartPosition;
+        transform.Rotate(0,-transform.rotation.eulerAngles.y,0);
     }
 }
