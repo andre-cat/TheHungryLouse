@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LouseMovement : MonoBehaviour
 {
@@ -21,22 +23,27 @@ public class LouseMovement : MonoBehaviour
     private Rigidbody louseRb;
     private Transform louseBody;
     private int numberOfJumps = 0;
+    private Vector3 restartPosition;
     
     private void Start()
     {
         louseRb = GetComponent<Rigidbody>();
         louseBody = transform.Find("Body");
+
+        restartPosition = transform.position;
         
         louseAnimator = GetComponent<Animator>();
         audioSource.clip = audioFile;
     }
     private void Update()
     {
+        const int verticalLimit = 15;
         inputForwardMovement = Input.GetAxis("Vertical");
         inputLateralMovement = Input.GetAxis("Horizontal");
         
-        if (IsOnAChild()) numberOfJumps = 0;
         if (numberOfJumps < 2) Jump();
+        if (IsOnAChild()) numberOfJumps = 0;
+        if (transform.position.y <= verticalLimit) RestoreToTheLastPosition();
         if (inputForwardMovement != 0 || inputLateralMovement != 0)
         {
             MovePlayer();
@@ -44,8 +51,17 @@ public class LouseMovement : MonoBehaviour
         }
         else
         {
-            louseRb.angularVelocity = Vector3.zero;
             louseAnimator.enabled = false;
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        Vector3 checkpointPosition = other.gameObject.transform.position;
+        if (other.gameObject.CompareTag("Checkpoint"))
+        {
+            restartPosition = checkpointPosition;
+            Destroy(other.gameObject);
         }
     }
 
@@ -66,12 +82,13 @@ public class LouseMovement : MonoBehaviour
     private void Jump()
     {
         // Distance in which the body moves to simulate momentum 
-        float impulseOfTheBody = 0.3f;
+        const float impulseOfTheBody = 0.3f;
         
         //Only take impulse in the first jump
         if (Input.GetKeyDown(KeyCode.Space) && numberOfJumps < 1)
         {
             louseBody.position -= (Vector3.up * impulseOfTheBody);
+            louseRb.angularVelocity = Vector3.zero;
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {   
@@ -88,15 +105,22 @@ public class LouseMovement : MonoBehaviour
             audioSource.Play();
         }
     }
+    
     // Detect that if the louse is on the head of a child
     private bool IsOnAChild()
     {
-        float rayLength = 1.2f;
+        const float rayLength = 1.2f;
         if (Physics.Raycast(transform.position, Vector3.down, out var hit, rayLength))
         {
             Vector3 normal = hit.normal;
-            if (normal.y > 0.8f) return true;
+            if (normal.y > 0.5f) return true;
         }
         return false;
+    }
+    
+    private void RestoreToTheLastPosition()
+    {
+        transform.position = restartPosition;
+        transform.Rotate(0,-transform.rotation.eulerAngles.y,0);
     }
 }
