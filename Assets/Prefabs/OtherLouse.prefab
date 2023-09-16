@@ -563,7 +563,6 @@ GameObject:
   - component: {fileID: 7868320810005405493}
   - component: {fileID: 2225757602434048782}
   - component: {fileID: 6000941407840652032}
-  - component: {fileID: 105253727380652038}
   m_Layer: 0
   m_Name: RigthEye
   m_TagString: Untagged
@@ -636,27 +635,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &105253727380652038
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2356149404670892559}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2663223598884374396
 GameObject:
   m_ObjectHideFlags: 0
@@ -2336,7 +2314,6 @@ GameObject:
   - component: {fileID: 8562194748906722809}
   - component: {fileID: 1842069774098948992}
   - component: {fileID: 5056721322752795489}
-  - component: {fileID: 4727791458604100632}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -2409,27 +2386,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4727791458604100632
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8165674553947610926}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8353792886282306025
 GameObject:
   m_ObjectHideFlags: 0
