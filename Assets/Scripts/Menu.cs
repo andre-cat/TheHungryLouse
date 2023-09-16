@@ -10,6 +10,7 @@ public class Menu : MonoBehaviour
 
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject options;
+    [SerializeField] private GameObject tutorial;
     [SerializeField] private GameObject credits;
 
     [SerializeField] private TMP_Text titleField;
@@ -30,6 +31,7 @@ public class Menu : MonoBehaviour
         
         menu.SetActive(true);
         options.SetActive(false);
+        tutorial.SetActive(false);
         credits.SetActive(false);
 
         currentPanel = menu;
@@ -48,6 +50,11 @@ public class Menu : MonoBehaviour
     public void GoToOptions()
     {
         StartCoroutine(Crossfade(options, 0.5f));
+    }
+
+    public void GoToTutorial()
+    {
+        StartCoroutine(Crossfade(tutorial, 0.5f));
     }
 
     public void GoToCredits()
