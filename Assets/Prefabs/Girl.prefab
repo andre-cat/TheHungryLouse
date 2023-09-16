@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 7611751760280346281}
   m_Layer: 0
   m_Name: Girl
-  m_TagString: Untagged
+  m_TagString: Child
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -779,8 +779,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0137234, y: 2.8696585, z: 1}
-  m_Center: {x: 0.0068608923, y: -0.9241303, z: 0}
+  m_Size: {x: 1.0651356, y: 2.8696585, z: 1.1128501}
+  m_Center: {x: 0.00670915, y: -0.9241303, z: -0.039641332}
 --- !u!114 &9214165584652572872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,7 +793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b14d499ce734dc41a19d4e301a9820f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  childSpeed: 0
   maxDistance: 0
   isActive: 0
 --- !u!95 &7611751760280346281
