@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 7374503911652947058}
   m_Layer: 0
   m_Name: Boy
-  m_TagString: Untagged
+  m_TagString: Child
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -356,8 +356,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0196475, y: 2.903053, z: 1}
-  m_Center: {x: -0.011383454, y: -0.95152557, z: 0}
+  m_Size: {x: 1.0196475, y: 2.9030545, z: 1.0731578}
+  m_Center: {x: -0.0113834655, y: -0.95152617, z: -0.017969422}
 --- !u!114 &1242793430789644506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b14d499ce734dc41a19d4e301a9820f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  childSpeed: 0
   maxDistance: 0
   isActive: 0
 --- !u!95 &7374503911652947058
