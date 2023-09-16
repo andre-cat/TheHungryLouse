@@ -5,45 +5,51 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Animator))]
 public class LouseMovement : MonoBehaviour
 {
-    [Header("Louse movement settings")] 
-    [SerializeField] [Tooltip("Set the speed of the louse")] 
+    [Header("Louse movement settings")]
+    [SerializeField]
+    [Tooltip("Set the speed of the louse")]
     private float moveSpeed;
-    [SerializeField] [Tooltip("Set the rotation speed of the louse")] 
+    [SerializeField]
+    [Tooltip("Set the rotation speed of the louse")]
     private float rotationSpeed;
-    [SerializeField] [Tooltip("Set how high the louse jumps")]
+    [SerializeField]
+    [Tooltip("Set how high the louse jumps")]
     private float jumpForce;
     [Header("Jump sound settings")]
-    [SerializeField] [Tooltip("Is the resource with audio data")]
-    private AudioClip audioFile;
-    
+
+    //[SerializeField] [Tooltip("Is the resource with audio data")]
+    //private AudioClip audioFile;
+
     //[SerializeField] [Tooltip("Is the component that is attached to the GameObject")]
     private AudioSource audioSource;
-    
+
     private Animator louseAnimator;
     private float inputForwardMovement, inputLateralMovement;
     private Rigidbody louseRb;
     private Transform louseBody;
     private int numberOfJumps = 0;
     private Vector3 restartPosition;
-    
+
     private void Start()
     {
         louseRb = GetComponent<Rigidbody>();
         louseBody = transform.Find("Body");
 
         restartPosition = transform.position;
-        
+
         louseAnimator = GetComponent<Animator>();
-        audioSource.clip = audioFile;
+        audioSource = GetComponent<AudioSource>();
+
     }
     private void Update()
     {
         const int verticalLimit = 15;
         inputForwardMovement = Input.GetAxis("Vertical");
         inputLateralMovement = Input.GetAxis("Horizontal");
-        
+
         if (numberOfJumps < 2) Jump();
         if (IsOnAChild()) numberOfJumps = 0;
         if (transform.position.y <= verticalLimit) RestoreToTheLastPosition();
@@ -72,7 +78,7 @@ public class LouseMovement : MonoBehaviour
     {
         // If The player is in the air, it keeps the vertical movement   
         Vector3 verticalMove = Vector3.up * louseRb.velocity.y;
-        
+
         // Used for focus in the local forward although the louse rotate 
         Vector3 localDirection = transform.forward;
         Vector3 localMovement = localDirection * inputForwardMovement * moveSpeed;
@@ -86,7 +92,7 @@ public class LouseMovement : MonoBehaviour
     {
         // Distance in which the body moves to simulate momentum 
         const float impulseOfTheBody = 0.3f;
-        
+
         //Only take impulse in the first jump
         if (Input.GetKeyDown(KeyCode.Space) && numberOfJumps < 1)
         {
@@ -94,9 +100,9 @@ public class LouseMovement : MonoBehaviour
             louseRb.angularVelocity = Vector3.zero;
         }
         if (Input.GetKeyUp(KeyCode.Space))
-        {   
+        {
             // Only return the body position in the first jump
-            if (numberOfJumps < 1) 
+            if (numberOfJumps < 1)
             {
                 louseBody.position += (Vector3.up * impulseOfTheBody);
             }
@@ -108,7 +114,7 @@ public class LouseMovement : MonoBehaviour
             audioSource.Play();
         }
     }
-    
+
     // Detect that if the louse is on the head of a child
     private bool IsOnAChild()
     {
@@ -120,10 +126,10 @@ public class LouseMovement : MonoBehaviour
         }
         return false;
     }
-    
+
     private void RestoreToTheLastPosition()
     {
         transform.position = restartPosition;
-        transform.Rotate(0,-transform.rotation.eulerAngles.y,0);
+        transform.Rotate(0, -transform.rotation.eulerAngles.y, 0);
     }
 }
