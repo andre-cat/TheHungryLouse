@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-[RequireComponent(typeof(AudioSource))]
 public class LouseMovement : MonoBehaviour
 {
     [Header("Louse movement settings")] 
@@ -17,12 +16,12 @@ public class LouseMovement : MonoBehaviour
     [Header("Jump sound settings")]
     [SerializeField] [Tooltip("Is the resource with audio data")]
     private AudioClip audioFile;
-    
-    //[SerializeField] [Tooltip("Is the component that is attached to the GameObject")]
+    [SerializeField] [Tooltip("Is the component that is attached to the GameObject")]
     private AudioSource audioSource;
     
     private Animator louseAnimator;
-    private float inputForwardMovement, inputLateralMovement;
+    private ParticleSystem louseParticles;
+    private float inputForwardMovement, inputLateralMovement, savedSpeed;
     private Rigidbody louseRb;
     private Transform louseBody;
     private int numberOfJumps = 0;
@@ -34,9 +33,11 @@ public class LouseMovement : MonoBehaviour
         louseBody = transform.Find("Body");
 
         restartPosition = transform.position;
-        
+
+        louseParticles = transform.Find("Particle System").GetComponent<ParticleSystem>();;
         louseAnimator = GetComponent<Animator>();
         audioSource.clip = audioFile;
+        savedSpeed = moveSpeed;
     }
     private void Update()
     {
@@ -45,7 +46,7 @@ public class LouseMovement : MonoBehaviour
         inputLateralMovement = Input.GetAxis("Horizontal");
         
         if (numberOfJumps < 2) Jump();
-        if (IsOnAChild()) numberOfJumps = 0;
+        //if (IsOnAChild()) numberOfJumps = 0;
         if (transform.position.y <= verticalLimit) RestoreToTheLastPosition();
         if (inputForwardMovement != 0 || inputLateralMovement != 0)
         {
@@ -58,7 +59,17 @@ public class LouseMovement : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (IsOnAChild())
+        {
+            numberOfJumps = 0;
+            return;
+        }
+        moveSpeed = 0;
+    }
+    
+    private void OnTriggerEnter(Collider other)
     {
         Vector3 checkpointPosition = other.gameObject.transform.position;
         if (other.gameObject.CompareTag("Checkpoint"))
@@ -88,7 +99,7 @@ public class LouseMovement : MonoBehaviour
         const float impulseOfTheBody = 0.3f;
         
         //Only take impulse in the first jump
-        if (Input.GetKeyDown(KeyCode.Space) && numberOfJumps < 1)
+        if (Input.GetKeyDown(KeyCode.Space) && numberOfJumps == 0)
         {
             louseBody.position -= (Vector3.up * impulseOfTheBody);
             louseRb.angularVelocity = Vector3.zero;
@@ -101,6 +112,7 @@ public class LouseMovement : MonoBehaviour
                 louseBody.position += (Vector3.up * impulseOfTheBody);
             }
             // Overrides the current vertical speed before applying the jump.
+            louseRb.angularVelocity = Vector3.zero;
             louseRb.velocity = new Vector3(louseRb.velocity.x, 0, louseRb.velocity.z);
             louseRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             numberOfJumps += 1;
@@ -112,18 +124,29 @@ public class LouseMovement : MonoBehaviour
     // Detect that if the louse is on the head of a child
     private bool IsOnAChild()
     {
-        const float rayLength = 1.2f;
-        if (Physics.Raycast(transform.position, Vector3.down, out var hit, rayLength))
+        // Shoot Multiple Raycast to probe the Louse in on the Child
+        const float rayLength = 1f;
+        int numberOfRaycasts = 8;
+        float angleBetweenRaycasts = 360f / numberOfRaycasts;
+        
+        for (int i = 0; i < numberOfRaycasts; i++)
         {
-            Vector3 normal = hit.normal;
-            if (normal.y > 0.5f) return true;
+            // Calculate the Raycast's direction
+            Quaternion raycastRotation = Quaternion.Euler(0f, 0f, i * angleBetweenRaycasts);
+            Vector3 directionActual = raycastRotation * -transform.up;
+            // Shoot the Raycast
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, directionActual, out hit, rayLength))
+                return true;
         }
         return false;
     }
     
     private void RestoreToTheLastPosition()
     {
+        moveSpeed = savedSpeed;
         transform.position = restartPosition;
         transform.Rotate(0,-transform.rotation.eulerAngles.y,0);
+        louseParticles.Play();
     }
 }
