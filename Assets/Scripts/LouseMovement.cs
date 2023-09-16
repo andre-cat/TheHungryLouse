@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(AudioSource))]
 public class LouseMovement : MonoBehaviour
 {
     [Header("Louse movement settings")] 
@@ -16,8 +17,10 @@ public class LouseMovement : MonoBehaviour
     [Header("Jump sound settings")]
     [SerializeField] [Tooltip("Is the resource with audio data")]
     private AudioClip audioFile;
-    [SerializeField] [Tooltip("Is the component that is attached to the GameObject")]
+    
+    //[SerializeField] [Tooltip("Is the component that is attached to the GameObject")]
     private AudioSource audioSource;
+    
     private Animator louseAnimator;
     private float inputForwardMovement, inputLateralMovement;
     private Rigidbody louseRb;
