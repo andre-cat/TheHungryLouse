@@ -1,21 +1,26 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Button))]
 public class Pause : MonoBehaviour
 {
 
     [SerializeField] private Image pausePanel;
 
-    private readonly bool isPause = false;
+    private Button pauseButton;
 
     private void Awake()
     {
+        pauseButton = gameObject.GetComponent<Button>();
+        pauseButton.onClick.AddListener(PauseGame);
         pausePanel.gameObject.SetActive(false);
     }
 
-    public void PauseGame()
+    private void PauseGame()
     {
-        if (isPause)
+        if (HungryLouse.pause)
         {
             Continue();
         }
@@ -27,13 +32,16 @@ public class Pause : MonoBehaviour
 
     private void Continue()
     {
+        HungryLouse.pause = false;
         Time.timeScale = 1f;
         pausePanel.gameObject.SetActive(false);
     }
 
     private void Stop()
     {
+        HungryLouse.pause = true;
         Time.timeScale = 0f;
         pausePanel.gameObject.SetActive(true);
     }
+
 }

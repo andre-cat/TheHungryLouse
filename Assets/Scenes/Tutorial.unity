@@ -1462,7 +1462,7 @@ Transform:
   m_GameObject: {fileID: 470252917}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3881627, y: 0, z: 0, w: 0.92159086}
-  m_LocalPosition: {x: 0, y: 44.2, z: -6}
+  m_LocalPosition: {x: 0, y: 59, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1611,7 +1611,7 @@ Transform:
   m_GameObject: {fileID: 486279349}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 34.9, z: 0}
+  m_LocalPosition: {x: 0, y: 50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2226,7 +2226,7 @@ Transform:
   m_GameObject: {fileID: 640078703}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3881627, y: 0, z: 0, w: 0.92159086}
-  m_LocalPosition: {x: 0, y: 44.2, z: -6}
+  m_LocalPosition: {x: 0, y: 59, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4390,8 +4390,8 @@ RectTransform:
   m_Children:
   - {fileID: 1776801319}
   - {fileID: 525800105}
-  - {fileID: 1843129904}
   - {fileID: 1856355972}
+  - {fileID: 1843129904}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5401,10 +5401,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1461858294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae3884cec1c00204386dfb8b7aeb7cd2, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b38366306072ee488e133a2a6462516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cover: {fileID: 1461858296}
 --- !u!1 &1540110484
 GameObject:
   m_ObjectHideFlags: 0
@@ -6213,7 +6212,7 @@ GameObject:
   - component: {fileID: 1843129906}
   - component: {fileID: 1843129905}
   m_Layer: 5
-  m_Name: Back
+  m_Name: BackMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6284,8 +6283,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1461858302}
-        m_TargetAssemblyTypeName: LevelMenu, Assembly-CSharp
-        m_MethodName: BackToMenu
+        m_TargetAssemblyTypeName: SceneCharger, Assembly-CSharp
+        m_MethodName: GoToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7084,7 +7083,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7287097824701895433, guid: 331acdca2981c5a4aa89c5a223fc6455, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7287097824701895433, guid: 331acdca2981c5a4aa89c5a223fc6455, type: 3}
       propertyPath: m_LocalPosition.z
