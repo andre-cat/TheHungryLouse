@@ -42,7 +42,7 @@ public class Menu : MonoBehaviour
 
     public void GoToGame()
     {
-        StartCoroutine(BleedTitle(titleField, playButton, bleedSeconds));
+        StartCoroutine(BleedTitle(titleField, bleedSeconds));
     }
 
     public void GoToOptions()
@@ -83,7 +83,7 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    public IEnumerator BleedTitle(TMP_Text titleTextField, Button playButton, float seconds)
+    public IEnumerator BleedTitle(TMP_Text titleTextField, float seconds)
     {
         playButton.interactable = false;
 
@@ -105,7 +105,6 @@ public class Menu : MonoBehaviour
         yield return StartCoroutine(CrossfadeScene($"Level{HungryLouse.Level}"));
 
         HungryLouse.PlayLevelMusic();
-
 
         yield break;
     }

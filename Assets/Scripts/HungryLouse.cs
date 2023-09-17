@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class HungryLouse : MonoBehaviour
@@ -34,6 +35,8 @@ public class HungryLouse : MonoBehaviour
     #endregion music
 
     public static float transitionSeconds = 0.5f;
+
+    public static bool pause = false;
 
     private static HungryLouse instance = null;
 
