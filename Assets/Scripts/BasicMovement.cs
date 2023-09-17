@@ -2,7 +2,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
-public class LouseMovement : MonoBehaviour
+public class BasicMovement : MonoBehaviour
 {
     [Header("Louse movement settings")]
     [SerializeField]
@@ -51,13 +51,11 @@ public class LouseMovement : MonoBehaviour
     }
     private void Update()
     {
-        const int verticalLimit = 15;
         inputForwardMovement = Input.GetAxis("Vertical");
         inputLateralMovement = Input.GetAxis("Horizontal");
 
         if (numberOfJumps < 2) Jump();
         //if (IsOnAChild()) numberOfJumps = 0;
-        if (transform.position.y <= verticalLimit) RestoreToTheLastPosition();
         if (inputForwardMovement != 0 || inputLateralMovement != 0)
         {
             MovePlayer();
@@ -76,7 +74,6 @@ public class LouseMovement : MonoBehaviour
             numberOfJumps = 0;
             return;
         }
-        moveSpeed = 0;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -150,13 +147,5 @@ public class LouseMovement : MonoBehaviour
                 return true;
         }
         return false;
-    }
-
-    private void RestoreToTheLastPosition()
-    {
-        moveSpeed = savedSpeed;
-        transform.position = restartPosition;
-        transform.Rotate(0, -transform.rotation.eulerAngles.y, 0);
-        louseParticles.Play();
     }
 }
