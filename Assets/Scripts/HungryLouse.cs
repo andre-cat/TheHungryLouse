@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class HungryLouse : MonoBehaviour
@@ -65,7 +61,7 @@ public class HungryLouse : MonoBehaviour
 
     private void StartPreferences()
     {
-        if (!PlayerPrefs.HasKey(VOLUME)) { Volume = 0.75f; }
+        if (!PlayerPrefs.HasKey(VOLUME)) { Volume = 0.25f; }
         Level = 1;
     }
 
@@ -104,6 +100,5 @@ public class HungryLouse : MonoBehaviour
         get { return PlayerPrefs.GetInt(LEVEL); }
         set { PlayerPrefs.SetInt(LEVEL, value); }
     }
-
     #endregion attributes
 }
