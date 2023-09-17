@@ -4,16 +4,20 @@ using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(Image))]
-[RequireComponent(typeof(Animator))]
 public class SceneCharger : MonoBehaviour
 {
+    [SerializeField] private string scene = "";
 
-   private Animator animator;
+    private Animator animator;
 
     private void Awake()
     {
-        animator = gameObject.GetComponent<Animator>();
+        animator = GameObject.FindGameObjectWithTag("Cover").GetComponent<Animator>();
+    }
+
+    public void GoToScene()
+    {
+        StartCoroutine(GoToScene(scene));
     }
 
     private IEnumerator GoToScene(string sceneName)
@@ -21,12 +25,7 @@ public class SceneCharger : MonoBehaviour
         animator.SetTrigger("exit");
         yield return new WaitForSecondsRealtime(HungryLouse.transitionSeconds);
         SceneManager.LoadScene(sceneName);
+        Time.timeScale = 1f;
     }
 
-    public void GoToMenu()
-    {
-        StartCoroutine(GoToScene("Menu"));
-        Time.timeScale = 1f;
-        HungryLouse.PlayMenuMusic();
-    }
 }

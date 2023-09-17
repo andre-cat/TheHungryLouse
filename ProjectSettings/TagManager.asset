@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Checkpoint
   - Child
+  - Cover
   layers:
   - Default
   - TransparentFX

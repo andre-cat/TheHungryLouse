@@ -38,6 +38,7 @@ public class Menu : MonoBehaviour
     private void Start()
     {
         transition.SetTrigger("enter");
+        HungryLouse.PlayMenuMusic();
     }
 
     public void GoToGame()

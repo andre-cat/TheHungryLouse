@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,9 +43,6 @@ public class HungryLouse : MonoBehaviour
 
     private void Awake()
     {
-        levelClip = levelClip_;
-        menuClip = menuClip_;
-
         if (instance == null)
         {
             instance = this;
@@ -60,6 +58,11 @@ public class HungryLouse : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        audioSource.Play();
+    }
+
     private void StartPreferences()
     {
         if (!PlayerPrefs.HasKey(VOLUME)) { Volume = 0.75f; }
@@ -68,8 +71,14 @@ public class HungryLouse : MonoBehaviour
 
     private void StartComponents()
     {
+        levelClip = levelClip_;
+        menuClip = menuClip_;
+
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.volume = Volume;
+        audioSource.playOnAwake = false;
+        audioSource.loop = true;
+        audioSource.clip = menuClip;
     }
 
     /*
