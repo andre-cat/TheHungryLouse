@@ -10,13 +10,10 @@ public class Menu : MonoBehaviour
 
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject options;
-    [SerializeField] private GameObject tutorial;
     [SerializeField] private GameObject credits;
 
     [SerializeField] private TMP_Text titleField;
-    [SerializeField] private Button playButtom;
-
-    [SerializeField] private AudioClip levelClip;
+    [SerializeField] private Button playButton;
 
     [SerializeField] private float bleedSeconds = 0;
 
@@ -26,15 +23,16 @@ public class Menu : MonoBehaviour
     private void Awake()
     {
         transition = cover.gameObject.GetComponent<Animator>();
-        
+
         cover.gameObject.SetActive(true);
-        
+
         menu.SetActive(true);
         options.SetActive(false);
-        tutorial.SetActive(false);
         credits.SetActive(false);
 
         currentPanel = menu;
+
+        playButton.interactable = true;
     }
 
     private void Start()
@@ -44,40 +42,48 @@ public class Menu : MonoBehaviour
 
     public void GoToGame()
     {
-        StartCoroutine(BleedTitle(titleField, playButtom, levelClip, bleedSeconds));
+        StartCoroutine(BleedTitle(titleField, playButton, bleedSeconds));
     }
 
     public void GoToOptions()
     {
-        StartCoroutine(Crossfade(options, 0.5f));
+        StartCoroutine(CrossfadePanel(options));
     }
 
     public void GoToTutorial()
     {
-        StartCoroutine(Crossfade(tutorial, 0.5f));
+        transition.SetTrigger("exit");
+        StartCoroutine(CrossfadeScene("Tutorial"));
     }
 
     public void GoToCredits()
     {
-        StartCoroutine(Crossfade(credits, 0.5f));
+        StartCoroutine(CrossfadePanel(credits));
     }
 
     public void GoToMenu()
     {
-        StartCoroutine(Crossfade(menu, 0.5f));
+        StartCoroutine(CrossfadePanel(menu));
     }
 
-    private IEnumerator Crossfade(GameObject panel, float seconds)
+    private IEnumerator CrossfadePanel(GameObject panel)
     {
         transition.SetTrigger("exit");
-        yield return new WaitForSeconds(seconds);
+        yield return new WaitForSeconds(HungryLouse.transitionSeconds);
         currentPanel.SetActive(false);
         panel.SetActive(true);
         currentPanel = panel;
         transition.SetTrigger("enter");
     }
 
-    public IEnumerator BleedTitle(TMP_Text titleTextField, Button playButton, AudioClip levelClip, float seconds)
+    private IEnumerator CrossfadeScene(string sceneName)
+    {
+        transition.SetTrigger("exit");
+        yield return new WaitForSeconds(HungryLouse.transitionSeconds);
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public IEnumerator BleedTitle(TMP_Text titleTextField, Button playButton, float seconds)
     {
         playButton.interactable = false;
 
@@ -96,10 +102,10 @@ public class Menu : MonoBehaviour
         }
 
         yield return new WaitForSeconds(seconds);
-        SceneManager.LoadScene($"Level{HungryLouse.Level}");
+        yield return StartCoroutine(CrossfadeScene($"Level{HungryLouse.Level}"));
 
-        HungryLouse.audioSource.clip = levelClip;
-        HungryLouse.audioSource.Play();
+        HungryLouse.PlayLevelMusic();
+
 
         yield break;
     }

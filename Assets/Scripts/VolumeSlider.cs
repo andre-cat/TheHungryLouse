@@ -25,7 +25,6 @@ public class VolumeSlider : MonoBehaviour
 
     private void SetVolume()
     {
-        HungryLouse.audioSource.volume = slider.value;
-        HungryLouse.Volume = HungryLouse.audioSource.volume;
+        HungryLouse.Volume = slider.value;
     }
 }

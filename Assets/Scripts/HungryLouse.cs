@@ -5,12 +5,43 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class HungryLouse : MonoBehaviour
 {
-    public static AudioSource audioSource;
+    #region music
+    [SerializeField] private AudioClip menuClip_;
+    [SerializeField] private AudioClip levelClip_;
+
+    private static AudioClip menuClip;
+    private static AudioClip levelClip;
+
+    private static AudioSource audioSource;
+
+    public static void PlayMenuMusic()
+    {
+        if (!audioSource.clip.Equals(menuClip))
+        {
+            audioSource.clip = menuClip;
+            audioSource.Play();
+        }
+    }
+
+    public static void PlayLevelMusic()
+    {
+        if (!audioSource.clip.Equals(levelClip))
+        {
+            audioSource.clip = levelClip;
+            audioSource.Play();
+        }
+    }
+    #endregion music
+
+    public static float transitionSeconds = 0.5f;
 
     private static HungryLouse instance = null;
 
     private void Awake()
     {
+        levelClip = levelClip_;
+        menuClip = menuClip_;
+
         if (instance == null)
         {
             instance = this;
@@ -46,13 +77,14 @@ public class HungryLouse : MonoBehaviour
     }
     */
 
+    #region attributes
     private static readonly string VOLUME = "volume";
     private static readonly string LEVEL = "level";
 
     public static float Volume
     {
         get { return PlayerPrefs.GetFloat(VOLUME); }
-        set { PlayerPrefs.SetFloat(VOLUME, value); }
+        set { PlayerPrefs.SetFloat(VOLUME, value); audioSource.volume = PlayerPrefs.GetFloat(VOLUME); }
     }
 
     public static int Level
@@ -60,4 +92,6 @@ public class HungryLouse : MonoBehaviour
         get { return PlayerPrefs.GetInt(LEVEL); }
         set { PlayerPrefs.SetInt(LEVEL, value); }
     }
+
+    #endregion attributes
 }
