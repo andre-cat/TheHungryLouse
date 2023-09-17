@@ -2053,7 +2053,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 1b84b6e3a6ece644aafd60db1fa82190, type: 3}
     - target: {fileID: 459158430697602119, guid: 331acdca2981c5a4aa89c5a223fc6455, type: 3}
       propertyPath: jumpForce
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 459158430697602119, guid: 331acdca2981c5a4aa89c5a223fc6455, type: 3}
       propertyPath: moveSpeed
@@ -19060,7 +19060,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1399642595
 MonoBehaviour:
   m_ObjectHideFlags: 0

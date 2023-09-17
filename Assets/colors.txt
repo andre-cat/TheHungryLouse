@@ -1,0 +1,5 @@
+dark_blue: 1A3E59
+ligth_blue: 4b687d
+dark_red: E50000
+ligth_red: EB3737
+gray: A1A1A1
