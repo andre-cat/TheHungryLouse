@@ -6330,9 +6330,9 @@ GameObject:
   - component: {fileID: 7287097824701895433}
   - component: {fileID: 3357909289035166308}
   - component: {fileID: 1740439187164721228}
-  - component: {fileID: 459158430697602119}
   - component: {fileID: 2404465599484544266}
   - component: {fileID: 4031079762660971810}
+  - component: {fileID: 459158430697602119}
   m_Layer: 0
   m_Name: Louse
   m_TagString: Untagged
@@ -6407,23 +6407,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8.688999, y: 3.2550707, z: 5.4016166}
   m_Center: {x: -0.16590405, y: -0.01070261, z: 0.70647}
---- !u!114 &459158430697602119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6483650134090812529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da98aabdbf69e4e41b97cc9371a95fb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotationSpeed: 20
-  jumpForce: 5
-  audioFile: {fileID: 0}
-  audioSource: {fileID: 0}
 --- !u!82 &2404465599484544266
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6437,15 +6420,15 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 1b84b6e3a6ece644aafd60db1fa82190, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 0.9
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2.3011096
-  MaxDistance: 500
+  MinDistance: 1
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -6480,7 +6463,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -6510,7 +6493,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.501
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -6541,6 +6524,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &459158430697602119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6483650134090812529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da98aabdbf69e4e41b97cc9371a95fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  rotationSpeed: 20
+  jumpForce: 5
 --- !u!1 &6541971523019131399
 GameObject:
   m_ObjectHideFlags: 0
