@@ -27,7 +27,10 @@ public class LouseMovement : MonoBehaviour
     private Transform louseBody;
     private int numberOfJumps = 0;
     private Vector3 restartPosition;
-    private AudioSource audioSource;
+    [SerializeField] private AudioSource jumpAudioSource;
+    [SerializeField] private AudioSource suckAudioSource;
+    [SerializeField] private float bloodLostPerSecond;
+    [SerializeField] private float suckAmount;
 
     private void Start()
     {
@@ -39,9 +42,12 @@ public class LouseMovement : MonoBehaviour
 
         louseParticles = transform.Find("Particle System").GetComponent<ParticleSystem>();
         louseAnimator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
         savedSpeed = moveSpeed;
+
+        HungryLouse.Blood = 100;
+        InvokeRepeating("DecreaseBlood", 0, 1);
     }
+
     private void Update()
     {
         const int verticalLimit = 15;
@@ -63,8 +69,18 @@ public class LouseMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        /*
+        if (collision.gameObject.tag == "Child")
+        {
+            //if (gameObject.name == "WinGirl"){}else{
+            //}
+        }
+        */
+
         if (collision.gameObject.CompareTag("Child"))
         {
+            SuckBlood();
+
         	if (IsOnAChild())
             {
                 transform.parent = collision.transform;
@@ -136,7 +152,7 @@ public class LouseMovement : MonoBehaviour
             louseRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             numberOfJumps += 1;
             // Jumping sound
-            audioSource.Play();
+            jumpAudioSource.Play();
         }
     }
 
@@ -179,4 +195,22 @@ public class LouseMovement : MonoBehaviour
         louseParticles.Play();
     }
 
+    private void DecreaseBlood()
+    {
+        if (HungryLouse.Blood > 0)
+        {
+            HungryLouse.Blood -= bloodLostPerSecond;
+        }
+        else
+        {
+            Debug.Log("¡Game Over!");
+        }
+    }
+
+    private void SuckBlood()
+    {
+
+        HungryLouse.Blood += suckAmount;
+        suckAudioSource.Play();
+    }
 }
