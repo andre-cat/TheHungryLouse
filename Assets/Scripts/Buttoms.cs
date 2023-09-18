@@ -14,16 +14,16 @@ public class Buttoms : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Colorize(up, KeyCode.UpArrow);
-        Colorize(down, KeyCode.DownArrow);
-        Colorize(left, KeyCode.LeftArrow);
-        Colorize(right, KeyCode.RightArrow);
-        Colorize(space, KeyCode.Space);
+        Colorize(up, KeyCode.UpArrow, KeyCode.W);
+        Colorize(down, KeyCode.DownArrow, KeyCode.S);
+        Colorize(left, KeyCode.LeftArrow, KeyCode.A);
+        Colorize(right, KeyCode.RightArrow, KeyCode.D);
+        Colorize(space, KeyCode.Space, KeyCode.Space);
     }
 
-    private void Colorize(Image image, KeyCode keyCode)
+    private void Colorize(Image image, KeyCode key, KeyCode altKey)
     {
-        if (Input.GetKey(keyCode))
+        if (Input.GetKey(key) | Input.GetKey(altKey))
         {
             image.color = pressColor;
         }

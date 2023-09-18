@@ -8,17 +8,20 @@ public class Pause : MonoBehaviour
     [SerializeField] private Image pausePanel;
 
     private Button pauseButton;
+    
+    private GameObject player;
 
     private void Awake()
     {
         pauseButton = gameObject.GetComponent<Button>();
         pauseButton.onClick.AddListener(PauseGame);
         pausePanel.gameObject.SetActive(false);
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void PauseGame()
     {
-        if (HungryLouse.pause)
+        if (HungryLouse.Pause)
         {
             Continue();
         }
@@ -30,16 +33,16 @@ public class Pause : MonoBehaviour
 
     private void Continue()
     {
-        HungryLouse.pause = false;
-        Time.timeScale = 1f;
+        player.GetComponent<LouseMovement>().enabled = true;
         pausePanel.gameObject.SetActive(false);
+        HungryLouse.Pause = false;
     }
 
     private void Stop()
     {
-        HungryLouse.pause = true;
-        Time.timeScale = 0f;
+        player.GetComponent<LouseMovement>().enabled = false;
         pausePanel.gameObject.SetActive(true);
+        HungryLouse.Pause = true;
     }
 
 }
