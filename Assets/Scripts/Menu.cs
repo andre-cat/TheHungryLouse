@@ -70,7 +70,7 @@ public class Menu : MonoBehaviour
     private IEnumerator CrossfadePanel(GameObject panel)
     {
         transition.SetTrigger("exit");
-        yield return new WaitForSeconds(HungryLouse.transitionSeconds);
+        yield return new WaitForSeconds(HungryLouse.crossfadeSeconds);
         currentPanel.SetActive(false);
         panel.SetActive(true);
         currentPanel = panel;
@@ -80,7 +80,7 @@ public class Menu : MonoBehaviour
     private IEnumerator CrossfadeScene(string sceneName)
     {
         transition.SetTrigger("exit");
-        yield return new WaitForSeconds(HungryLouse.transitionSeconds);
+        yield return new WaitForSeconds(HungryLouse.crossfadeSeconds);
         SceneManager.LoadScene(sceneName);
     }
 

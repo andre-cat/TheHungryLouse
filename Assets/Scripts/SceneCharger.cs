@@ -21,7 +21,7 @@ public class SceneCharger : MonoBehaviour
     private IEnumerator GoToScene(string sceneName)
     {
         animator.SetTrigger("exit");
-        yield return new WaitForSecondsRealtime(HungryLouse.transitionSeconds);
+        yield return new WaitForSecondsRealtime(HungryLouse.crossfadeSeconds);
         SceneManager.LoadScene(sceneName);
         Time.timeScale = 1f;
     }

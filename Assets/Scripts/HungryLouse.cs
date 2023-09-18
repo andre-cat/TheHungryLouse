@@ -31,19 +31,12 @@ public class HungryLouse : MonoBehaviour
     }
     #endregion music
 
-    public static float transitionSeconds = 0.5f;
-
-    public static bool pause = false;
-
-    private static HungryLouse instance = null;
-
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
 
-            StartPreferences();
             StartComponents();
 
             DontDestroyOnLoad(gameObject);
@@ -59,12 +52,6 @@ public class HungryLouse : MonoBehaviour
         audioSource.Play();
     }
 
-    private void StartPreferences()
-    {
-        if (!PlayerPrefs.HasKey(VOLUME)) { Volume = 0.25f; }
-        Level = 1;
-    }
-
     private void StartComponents()
     {
         levelClip = levelClip_;
@@ -77,28 +64,31 @@ public class HungryLouse : MonoBehaviour
         audioSource.clip = menuClip;
     }
 
-    /*
-    private void ResetPreferences()
-    {
-        PlayerPrefs.DeleteAll();
-        StartPreferences();
-    }
-    */
-
     #region attributes
+
+    private static HungryLouse instance = null;
+
+    public static float crossfadeSeconds = 0.5f;
+    
     private static readonly string VOLUME = "volume";
     private static readonly string LEVEL = "level";
 
     public static float Volume
     {
-        get { return PlayerPrefs.GetFloat(VOLUME); }
+        get { return PlayerPrefs.GetFloat(VOLUME, 0.25f); }
         set { PlayerPrefs.SetFloat(VOLUME, value); audioSource.volume = PlayerPrefs.GetFloat(VOLUME); }
     }
 
     public static int Level
     {
-        get { return PlayerPrefs.GetInt(LEVEL); }
+        get { return PlayerPrefs.GetInt(LEVEL, 1); }
         set { PlayerPrefs.SetInt(LEVEL, value); }
+    }
+
+    public static bool Pause
+    {
+        get { return Time.timeScale == 0; }
+        set { if (value) { Time.timeScale = 0; } else { Time.timeScale = 1; } }
     }
     #endregion attributes
 }
