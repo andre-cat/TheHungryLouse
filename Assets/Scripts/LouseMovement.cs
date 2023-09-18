@@ -69,15 +69,18 @@ public class LouseMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        /*
         if (collision.gameObject.tag == "Child")
         {
             //if (gameObject.name == "WinGirl"){}else{
-            SuckBlood();
             //}
         }
+        */
 
         if (collision.gameObject.CompareTag("Child"))
         {
+            SuckBlood();
+
         	if (IsOnAChild())
             {
                 transform.parent = collision.transform;
