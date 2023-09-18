@@ -14,6 +14,9 @@ public class LouseMovement : MonoBehaviour
     [SerializeField]
     [Tooltip("Set how high the louse jumps")]
     private float jumpForce;
+	[Header("Final Ui Panel")]
+	[SerializeField]
+	public GameObject uiFinalPanel;
 
     private Quaternion saveRotation;    
     private Animator louseAnimator;
@@ -60,16 +63,17 @@ public class LouseMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (IsOnAChild())
+        if (collision.gameObject.CompareTag("Child"))
         {
-            if (collision.gameObject.CompareTag("Child"))
+        	if (IsOnAChild())
             {
                 transform.parent = collision.transform;
+            	numberOfJumps = 0;
+            	return;
             }
-            numberOfJumps = 0;
-            return;
+        	moveSpeed = 0;	
         }
-        moveSpeed = 0;
+		numberOfJumps = 0;
     }
 
     private void OnCollisionExit()
@@ -86,6 +90,11 @@ public class LouseMovement : MonoBehaviour
         {
             restartPosition = checkpointPosition;
             Destroy(other.gameObject);
+        }
+		if (other.gameObject.CompareTag("Finish"))
+        {
+            restartPosition = checkpointPosition;
+            uiFinalPanel.SetActive(true);
         }
     }
 
@@ -170,8 +179,4 @@ public class LouseMovement : MonoBehaviour
         louseParticles.Play();
     }
 
-    private void MoveWithTheChild(ChildMovement child)
-    {
-        
-    }
 }
