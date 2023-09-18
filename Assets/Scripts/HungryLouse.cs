@@ -69,9 +69,10 @@ public class HungryLouse : MonoBehaviour
     private static HungryLouse instance = null;
 
     public static float crossfadeSeconds = 0.5f;
-    
+
     private static readonly string VOLUME = "volume";
     private static readonly string LEVEL = "level";
+    private static float blood;
 
     public static float Volume
     {
@@ -89,6 +90,12 @@ public class HungryLouse : MonoBehaviour
     {
         get { return Time.timeScale == 0; }
         set { if (value) { Time.timeScale = 0; } else { Time.timeScale = 1; } }
+    }
+
+    public static float Blood
+    {
+        get { return blood; }
+        set { blood = value; }
     }
     #endregion attributes
 }
