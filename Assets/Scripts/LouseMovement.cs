@@ -152,7 +152,7 @@ public class LouseMovement : MonoBehaviour
         return false;
     }
 
-    private void RestoreToTheLastPosition()
+    public void RestoreToTheLastPosition()
     {
         moveSpeed = savedSpeed;
         transform.position = restartPosition;
