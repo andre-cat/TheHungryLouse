@@ -14,24 +14,13 @@ public class LouseMovement : MonoBehaviour
     [SerializeField]
     [Tooltip("Set how high the louse jumps")]
     private float jumpForce;
-    [Header("Jump sound settings")]
 
-    /*
-    [SerializeField]
-    [Tooltip("Is the resource with audio data")]
-    private AudioClip audioFile;
-    */
-
-    /*
-    [SerializeField]
-    [Tooltip("Is the component that is attached to the GameObject")]
-    private AudioSource audioSource;
-    */
-
+    private Quaternion saveRotation;    
     private Animator louseAnimator;
     private ParticleSystem louseParticles;
     private float inputForwardMovement, inputLateralMovement, savedSpeed;
     private Rigidbody louseRb;
+    private Collider louseCollider;
     private Transform louseBody;
     private int numberOfJumps = 0;
     private Vector3 restartPosition;
@@ -40,6 +29,7 @@ public class LouseMovement : MonoBehaviour
     private void Start()
     {
         louseRb = GetComponent<Rigidbody>();
+        louseCollider = GetComponent<Collider>();
         louseBody = transform.Find("Body");
 
         restartPosition = transform.position;
@@ -56,7 +46,6 @@ public class LouseMovement : MonoBehaviour
         inputLateralMovement = Input.GetAxis("Horizontal");
 
         if (numberOfJumps < 2) Jump();
-        //if (IsOnAChild()) numberOfJumps = 0;
         if (transform.position.y <= verticalLimit) RestoreToTheLastPosition();
         if (inputForwardMovement != 0 || inputLateralMovement != 0)
         {
@@ -73,14 +62,25 @@ public class LouseMovement : MonoBehaviour
     {
         if (IsOnAChild())
         {
+            if (collision.gameObject.CompareTag("Child"))
+            {
+                transform.parent = collision.transform;
+            }
             numberOfJumps = 0;
             return;
         }
         moveSpeed = 0;
     }
 
+    private void OnCollisionExit()
+    {
+        transform.SetParent(null);
+        moveSpeed = savedSpeed;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
+        // Checkpoit interaction
         Vector3 checkpointPosition = other.gameObject.transform.position;
         if (other.gameObject.CompareTag("Checkpoint"))
         {
@@ -134,19 +134,29 @@ public class LouseMovement : MonoBehaviour
     // Detect that if the louse is on the head of a child
     private bool IsOnAChild()
     {
-        // Shoot Multiple Raycast to probe the Louse in on the Child
         const float rayLength = 1f;
-        int numberOfRaycasts = 8;
-        float angleBetweenRaycasts = 360f / numberOfRaycasts;
+        // Collider's borders
+        float leftBorder = transform.position.x - GetComponent<Collider>().bounds.size.x / 2;
+        float rightBorder = transform.position.x + GetComponent<Collider>().bounds.size.x / 2;
+        float frontBorder = transform.position.z - GetComponent<Collider>().bounds.size.z / 2;
+        float backBorder = transform.position.z + GetComponent<Collider>().bounds.size.z / 2;
+        
+        // Different positions in which Raycasts will be fired
+        Vector3[] initialPositionsRaycasts = new Vector3[]{
+            new Vector3(transform.position.x, transform.position.y, frontBorder), // Front
+            new Vector3(rightBorder, transform.position.y, frontBorder), // Front-Right
+            new Vector3(rightBorder, transform.position.y, transform.position.z), // Right
+            new Vector3(rightBorder, transform.position.y, backBorder), // Back-Right
+            new Vector3(transform.position.x, transform.position.y, backBorder), // Back
+            new Vector3(leftBorder, transform.position.y, backBorder), // Back-Left
+            new Vector3(leftBorder, transform.position.y, transform.position.z), // Left
+            new Vector3(leftBorder, transform.position.y, frontBorder)}; // Front-Left
 
-        for (int i = 0; i < numberOfRaycasts; i++)
+        for (int i = 0; i < initialPositionsRaycasts.Length; i++)
         {
-            // Calculate the Raycast's direction
-            Quaternion raycastRotation = Quaternion.Euler(0f, 0f, i * angleBetweenRaycasts);
-            Vector3 directionActual = raycastRotation * -transform.up;
-            // Shoot the Raycast
+            // Fire the Raycast
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, directionActual, out hit, rayLength))
+            if (Physics.Raycast(initialPositionsRaycasts[i], Vector3.down, out hit, rayLength))
                 return true;
         }
         return false;
@@ -158,5 +168,10 @@ public class LouseMovement : MonoBehaviour
         transform.position = restartPosition;
         transform.Rotate(0, -transform.rotation.eulerAngles.y, 0);
         louseParticles.Play();
+    }
+
+    private void MoveWithTheChild(ChildMovement child)
+    {
+        
     }
 }
